@@ -1,6 +1,14 @@
 {
-  "version": "0.0.0",
-  "keywords": [],
+  "name": "strapi-plugin-tags-input",
+  "version": "0.1.0",
+  "description": "Custom field plugin for Strapi 5 to manage tags (array of strings) stored as a JSON string.",
+  "keywords": [
+    "strapi",
+    "strapi-plugin",
+    "strapi5",
+    "custom-field",
+    "tags"
+  ],
   "type": "commonjs",
   "exports": {
     "./package.json": "./package.json",
@@ -58,12 +66,10 @@
   },
   "strapi": {
     "kind": "plugin",
-    "name": ".",
-    "displayName": "",
-    "description": ""
+    "name": "tags-input",
+    "displayName": "Tags Input",
+    "description": "Custom field for tags (array of strings) stored as JSON string"
   },
-  "name": ".",
-  "description": "",
   "license": "MIT",
   "author": "Rony Freitas <ronyfreitas98@gmail.com>"
 }

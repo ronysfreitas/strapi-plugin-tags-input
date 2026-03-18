@@ -1,1 +1,5 @@
-{}
+{
+  "plugin.name": "Tags Input",
+  "field.tags.label": "Tags",
+  "field.tags.description": "Store tags as a JSON string array"
+}

@@ -1,29 +1,33 @@
-import { getTranslation } from "./utils/getTranslation";
 import { PLUGIN_ID } from "./pluginId";
-import { Initializer } from "./components/Initializer";
 import { PluginIcon } from "./components/PluginIcon";
+import { getTranslation } from "./utils/getTranslation";
 
 export default {
   register(app: any) {
-    app.addMenuLink({
-      to: `plugins/${PLUGIN_ID}`,
-      icon: PluginIcon,
+    app.customFields.register({
+      name: "tags",
+      pluginId: PLUGIN_ID,
+      type: "text",
       intlLabel: {
-        id: `${PLUGIN_ID}.plugin.name`,
-        defaultMessage: PLUGIN_ID,
+        id: getTranslation("field.tags.label"),
+        defaultMessage: "Tags",
       },
-      Component: async () => {
-        const { App } = await import("./pages/App");
-
-        return App;
+      intlDescription: {
+        id: getTranslation("field.tags.description"),
+        defaultMessage: "Edit tags as an array of strings",
+      },
+      icon: PluginIcon,
+      components: {
+        Input: async () =>
+          import("./components/TagsInput").then((module) => ({
+            default: module.TagsInput,
+          })),
       },
     });
 
     app.registerPlugin({
       id: PLUGIN_ID,
-      initializer: Initializer,
-      isReady: false,
-      name: PLUGIN_ID,
+      name: "Tags Input",
     });
   },
 
