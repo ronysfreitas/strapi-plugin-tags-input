@@ -22,8 +22,8 @@ Restart your Strapi server after installation.
 
 ## Field options
 
-- `maxTags` (default: `20`): maximum number of tags.
-- `maxTagLength` (default: `40`): maximum characters per tag.
+- `maxTags` (default: `50`): maximum number of tags.
+- `maxTagLength` (default: `100`): maximum characters per tag.
 - `allowDuplicates` (default: `false`): allow repeated tags.
 - `separator` (optional): character used to split typed/pasted values.
 - `normalizeCase` (default: `none`): `none`, `lowercase`, or `UPPERCASE`.
