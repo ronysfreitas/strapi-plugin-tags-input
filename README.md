@@ -20,10 +20,24 @@ Strapi 5 plugin that adds a `tags` custom field to edit a list of tags (`array o
 ```bash
 npm install
 npm run build
+npm run test:ts
 npm run verify
 ```
 
-## How to use in a Strapi 5 project
+## Install from npm (recommended)
+
+```bash
+npm install strapi-plugin-tags-input
+```
+
+Then restart your Strapi server and add the field in Content-Type Builder:
+
+- Add a new field.
+- Open the Custom fields category.
+- Select `Tags`.
+- Configure the custom field options if needed (see below).
+
+## Link locally during development
 
 1. In the plugin project:
 
@@ -40,12 +54,7 @@ npm install
 npm run develop
 ```
 
-3. In the Content-Type Builder:
-
-- Add a new field.
-- Open the Custom fields category.
-- Select `Tags`.
-- Configure the custom field options if needed (see below).
+3. In the Strapi Content-Type Builder, add the `Tags` custom field.
 
 ## Input behavior and UX
 
@@ -75,3 +84,19 @@ The value is stored as a native JSON array. Examples:
 - `server/src/register.ts`: backend custom field registration.
 - `admin/src/index.ts`: admin custom field registration.
 - `admin/src/components/TagsInput.tsx`: visual input with add/remove tag behavior.
+
+## Release checklist
+
+1. Update version in `package.json`.
+2. Run:
+
+```bash
+npm ci
+npm run release:check
+```
+
+3. Publish to npm:
+
+```bash
+npm publish
+```
