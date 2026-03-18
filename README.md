@@ -1,103 +1,60 @@
-# strapi-plugin-tags-custom-field
+﻿# strapi-plugin-tags-custom-field
 
-Strapi 5 plugin that adds a `tags` custom field to edit a list of tags (`array of strings`) and store it as a native JSON array.
+NPM package: https://www.npmjs.com/package/strapi-plugin-tags-custom-field
 
-## What this plugin does
+Custom field plugin for Strapi 5 to manage tags as a native JSON array (`string[]`).
 
-- Registers the `tags` custom field on the server (`type: json`).
-- Registers the custom field in the admin panel with a tags input component.
-- Saves tags as JSON array values (e.g. `["news","featured","tech"]`).
-- Uses Strapi Design System components for native admin look and feel.
-- Supports keyboard and clipboard workflows for faster data entry.
-
-## Requirements
-
-- Node.js 18+ (recommended: Node.js 20)
-- Strapi 5
-
-## Local plugin development
-
-```bash
-npm install
-npm run build
-npm run test:ts
-npm run verify
-```
-
-## Install from npm (recommended)
+## Installation
 
 ```bash
 npm install strapi-plugin-tags-custom-field
 ```
 
-Then restart your Strapi server and add the field in Content-Type Builder:
+Restart your Strapi server after installation.
 
-- Add a new field.
-- Open the Custom fields category.
-- Select `Tags`.
-- Configure the custom field options if needed (see below).
+## Usage in Strapi
 
-## Link locally during development
+1. Open Content-Type Builder.
+2. Add a new field.
+3. Open **Custom fields**.
+4. Select **Tags**.
+5. Configure field options if needed.
 
-1. In the plugin project:
+## Field options
+
+- `maxTags` (default: `20`): maximum number of tags.
+- `maxTagLength` (default: `40`): maximum characters per tag.
+- `allowDuplicates` (default: `false`): allow repeated tags.
+- `separator` (default: `,`): character used to split typed/pasted values.
+- `normalizeCase` (default: `none`): `none`, `lowercase`, or `UPPERCASE`.
+
+## Input behavior
+
+- `Enter` adds the current tag.
+- The configured separator also adds the current tag.
+- Paste supports multiple tags (newline or configured separator).
+- `Backspace` on empty input removes the last tag.
+
+## Data format
+
+The value is stored as native JSON array and returned as array by Strapi APIs.
+
+Example:
+
+```json
+{
+  "tags": ["javascript", "strapi", "cms"]
+}
+```
+
+## Compatibility
+
+- Strapi: `v5`
+- Node.js: `>=18`
+
+## Local development (plugin repo)
 
 ```bash
 npm install
-npm run watch:link
-```
-
-2. In the Strapi project (in another terminal):
-
-```bash
-npx yalc add --link strapi-plugin-tags-custom-field
-npm install
-npm run develop
-```
-
-3. In the Strapi Content-Type Builder, add the `Tags` custom field.
-
-## Input behavior and UX
-
-- Press `Enter` to add the current tag.
-- Press the configured separator (default: `,`) to add the current tag.
-- Paste multiple tags at once (separated by newline or the configured separator).
-- Press `Backspace` on an empty input to remove the last tag.
-- Each draft tag has a configurable character limit with a live counter in the UI.
-
-## Custom field options (Content-Type Builder)
-
-- `maxTags` (number, default: `20`): maximum number of tags allowed.
-- `maxTagLength` (number, default: `40`): maximum number of characters per tag.
-- `allowDuplicates` (boolean, default: `false`): allows repeated tags.
-- `separator` (text, default: `,`): character used for splitting input/paste.
-- `normalizeCase` (select, default: `none`): `none`, `lowercase`, or `UPPERCASE`.
-
-## Database value format
-
-The value is stored as a native JSON array. Examples:
-
-- No tags: `[]`
-- With tags: `["javascript","strapi","cms"]`
-
-## Main structure
-
-- `server/src/register.ts`: backend custom field registration.
-- `admin/src/index.ts`: admin custom field registration.
-- `admin/src/components/TagsInput.tsx`: visual input with add/remove tag behavior.
-
-## Release checklist
-
-1. Update version in `package.json`.
-2. Run:
-
-```bash
-npm ci
 npm run release:check
 ```
-
-3. Publish to npm:
-
-```bash
-npm publish
-```
-
