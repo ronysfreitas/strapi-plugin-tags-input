@@ -72,13 +72,10 @@ const parseTagsValue = (value: unknown): string[] => {
         .filter((item) => item.length > 0);
     }
   } catch {
-    // Fallback for legacy comma-separated values.
+    // Fallback for plain string values.
   }
 
-  return normalized
-    .split(",")
-    .map((item) => item.trim())
-    .filter((item) => item.length > 0);
+  return [normalized];
 };
 
 const serializeTagsValue = (tags: string[]) => JSON.stringify(tags);
@@ -132,7 +129,7 @@ const parsePositiveInt = (value: unknown, fallbackValue: number): number => {
 };
 
 const getSplitRegex = (separator: string) => {
-  const characters = Array.from(new Set([separator, ",", "\n", "\r"])).filter(
+  const characters = Array.from(new Set([separator, "\n", "\r"])).filter(
     (character) => character.length > 0
   );
 
@@ -154,7 +151,7 @@ const parseRawTags = (
     .filter((tag) => tag.length > 0);
 
 const hasSplitCharacters = (value: string, separator: string) =>
-  [separator, ",", "\n", "\r"].some(
+  [separator, "\n", "\r"].some(
     (character) => character.length > 0 && value.includes(character)
   );
 
@@ -330,7 +327,7 @@ const TagsInput = React.forwardRef<HTMLInputElement, TagsInputProps>(
     }, [emitChange]);
 
     const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-      if (event.key === "Enter" || event.key === separator || event.key === ",") {
+      if (event.key === "Enter" || event.key === separator) {
         event.preventDefault();
         commitDraft();
       }

@@ -51,7 +51,7 @@ npm run develop
 
 - Press `Enter` to add the current tag.
 - Press the configured separator (default: `,`) to add the current tag.
-- Paste multiple tags at once (separated by comma/newline/custom separator).
+- Paste multiple tags at once (separated by newline or the configured separator).
 - Press `Backspace` on an empty input to remove the last tag.
 - Each draft tag has a character limit with a live counter in the UI.
 
