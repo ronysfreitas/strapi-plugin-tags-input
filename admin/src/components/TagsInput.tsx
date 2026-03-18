@@ -317,29 +317,10 @@ const TagsInput = React.forwardRef<HTMLInputElement, TagsInputProps>(
       [emitChange]
     );
 
-    const removeLastTag = React.useCallback(() => {
-      setTags((currentTags) => {
-        if (currentTags.length === 0) {
-          return currentTags;
-        }
-
-        const nextTags = currentTags.slice(0, currentTags.length - 1);
-        emitChange(nextTags);
-        setLocalError(undefined);
-
-        return nextTags;
-      });
-    }, [emitChange]);
-
     const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
       if (event.key === "Enter" || event.key === separator) {
         event.preventDefault();
         commitDraft();
-      }
-
-      if (event.key === "Backspace" && draft.length === 0 && !disabled) {
-        event.preventDefault();
-        removeLastTag();
       }
     };
 

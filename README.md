@@ -33,7 +33,6 @@ Restart your Strapi server after installation.
 - `Enter` adds the current tag.
 - The configured separator also adds the current tag.
 - Paste supports multiple tags (newline or configured separator).
-- `Backspace` on empty input removes the last tag.
 
 ## Data format
 
