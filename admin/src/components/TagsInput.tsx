@@ -43,8 +43,8 @@ type TagsInputProps = {
   value?: unknown;
 };
 
-const DEFAULT_MAX_TAGS = 20;
-const DEFAULT_MAX_TAG_LENGTH = 40;
+const DEFAULT_MAX_TAGS = 50;
+const DEFAULT_MAX_TAG_LENGTH = 100;
 
 const parseTagsValue = (value: unknown): string[] => {
   if (Array.isArray(value)) {

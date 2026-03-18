@@ -38,7 +38,7 @@ export default {
                 },
                 description: {
                   id: getTranslation("field.tags.options.maxTags.description"),
-                  defaultMessage: "Maximum number of tags allowed",
+                  defaultMessage: "Maximum number of tags allowed (default 50)",
                 },
                 name: "options.maxTags",
                 type: "number",
@@ -53,7 +53,7 @@ export default {
                   id: getTranslation(
                     "field.tags.options.maxTagLength.description"
                   ),
-                  defaultMessage: "Maximum number of characters per tag",
+                  defaultMessage: "Maximum number of characters per tag (default 100)",
                 },
                 name: "options.maxTagLength",
                 type: "number",
