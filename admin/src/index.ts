@@ -46,6 +46,21 @@ export default {
               },
               {
                 intlLabel: {
+                  id: getTranslation("field.tags.options.maxTagLength.label"),
+                  defaultMessage: "Maximum tag length",
+                },
+                description: {
+                  id: getTranslation(
+                    "field.tags.options.maxTagLength.description"
+                  ),
+                  defaultMessage: "Maximum number of characters per tag",
+                },
+                name: "options.maxTagLength",
+                type: "number",
+                value: 40,
+              },
+              {
+                intlLabel: {
                   id: getTranslation("field.tags.options.allowDuplicates.label"),
                   defaultMessage: "Allow duplicates",
                 },

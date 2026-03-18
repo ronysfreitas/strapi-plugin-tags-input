@@ -5,6 +5,8 @@
   "field.tags.options.behavior.section": "Tag behavior",
   "field.tags.options.maxTags.label": "Maximum tags",
   "field.tags.options.maxTags.description": "Maximum number of tags allowed",
+  "field.tags.options.maxTagLength.label": "Maximum tag length",
+  "field.tags.options.maxTagLength.description": "Maximum number of characters per tag",
   "field.tags.options.allowDuplicates.label": "Allow duplicates",
   "field.tags.options.allowDuplicates.description": "Allow repeated tags in the same value",
   "field.tags.options.input.section": "Input parsing",

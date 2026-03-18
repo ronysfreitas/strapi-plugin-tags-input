@@ -17,6 +17,7 @@ type TagsInputProps = {
     type?: string;
     options?: {
       maxTags?: number | string;
+      maxTagLength?: number | string;
       allowDuplicates?: boolean | string;
       normalizeCase?: NormalizeCase | string;
       separator?: string;
@@ -187,6 +188,10 @@ const TagsInput = React.forwardRef<HTMLInputElement, TagsInputProps>(
         ? options.separator.trim().charAt(0)
         : DEFAULT_SEPARATOR;
     const maxTags = parsePositiveInt(options.maxTags, DEFAULT_MAX_TAGS);
+    const maxTagLength = parsePositiveInt(
+      options.maxTagLength,
+      DEFAULT_MAX_TAG_LENGTH
+    );
     const allowDuplicates = parseBoolean(options.allowDuplicates, false);
     const normalizeCase = normalizeCaseValue(options.normalizeCase);
 
@@ -246,7 +251,7 @@ const TagsInput = React.forwardRef<HTMLInputElement, TagsInputProps>(
               break;
             }
 
-            if (rawTag.length > DEFAULT_MAX_TAG_LENGTH) {
+            if (rawTag.length > maxTagLength) {
               setLocalError(
                 formatMessage(
                   {
@@ -254,7 +259,7 @@ const TagsInput = React.forwardRef<HTMLInputElement, TagsInputProps>(
                     defaultMessage:
                       "Each tag must be at most {maxLength} characters.",
                   },
-                  { maxLength: DEFAULT_MAX_TAG_LENGTH }
+                  { maxLength: maxTagLength }
                 )
               );
               continue;
@@ -288,7 +293,7 @@ const TagsInput = React.forwardRef<HTMLInputElement, TagsInputProps>(
 
         return didChange;
       },
-      [allowDuplicates, emitChange, formatMessage, maxTags]
+      [allowDuplicates, emitChange, formatMessage, maxTagLength, maxTags]
     );
 
     const commitDraft = React.useCallback(() => {
@@ -395,7 +400,7 @@ const TagsInput = React.forwardRef<HTMLInputElement, TagsInputProps>(
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               const nextDraft = event.currentTarget.value;
 
-              if (nextDraft.length <= DEFAULT_MAX_TAG_LENGTH) {
+              if (nextDraft.length <= maxTagLength) {
                 setDraft(nextDraft);
                 if (localError) {
                   setLocalError(undefined);
@@ -408,7 +413,7 @@ const TagsInput = React.forwardRef<HTMLInputElement, TagsInputProps>(
                       defaultMessage:
                         "Each tag must be at most {maxLength} characters.",
                     },
-                    { maxLength: DEFAULT_MAX_TAG_LENGTH }
+                    { maxLength: maxTagLength }
                   )
                 );
               }
@@ -442,7 +447,7 @@ const TagsInput = React.forwardRef<HTMLInputElement, TagsInputProps>(
             <Typography
               variant="pi"
               textColor={
-                draft.length >= DEFAULT_MAX_TAG_LENGTH ? "danger600" : "neutral600"
+                draft.length >= maxTagLength ? "danger600" : "neutral600"
               }
             >
               {formatMessage(
@@ -450,7 +455,7 @@ const TagsInput = React.forwardRef<HTMLInputElement, TagsInputProps>(
                   id: "tags-input.counter.characters",
                   defaultMessage: "{count}/{maxLength} characters",
                 },
-                { count: draft.length, maxLength: DEFAULT_MAX_TAG_LENGTH }
+                { count: draft.length, maxLength: maxTagLength }
               )}
             </Typography>
           </Flex>

@@ -53,11 +53,12 @@ npm run develop
 - Press the configured separator (default: `,`) to add the current tag.
 - Paste multiple tags at once (separated by newline or the configured separator).
 - Press `Backspace` on an empty input to remove the last tag.
-- Each draft tag has a character limit with a live counter in the UI.
+- Each draft tag has a configurable character limit with a live counter in the UI.
 
 ## Custom field options (Content-Type Builder)
 
 - `maxTags` (number, default: `20`): maximum number of tags allowed.
+- `maxTagLength` (number, default: `40`): maximum number of characters per tag.
 - `allowDuplicates` (boolean, default: `false`): allows repeated tags.
 - `separator` (text, default: `,`): character used for splitting input/paste.
 - `normalizeCase` (select, default: `none`): `none`, `lowercase`, or `UPPERCASE`.
