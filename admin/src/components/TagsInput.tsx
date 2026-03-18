@@ -364,6 +364,7 @@ const TagsInput = React.forwardRef<HTMLInputElement, TagsInputProps>(
       >
         <Flex direction="column" alignItems="stretch" gap={2}>
           <Field.Label>{labelMessage}</Field.Label>
+          <Field.Hint />
 
           {tags.length > 0 ? (
             <Box
@@ -459,7 +460,6 @@ const TagsInput = React.forwardRef<HTMLInputElement, TagsInputProps>(
             </Typography>
           </Flex>
 
-          <Field.Hint />
           <Field.Error />
         </Flex>
       </Field.Root>
