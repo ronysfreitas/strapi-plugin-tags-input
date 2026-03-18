@@ -1,19 +1,19 @@
-# strapi-plugin-tags-input
+ï»¿# strapi-plugin-tags-input
 
-Plugin para Strapi 5 que adiciona um custom field `tags` para editar uma lista de tags (`array de strings`) e salvar no banco como `string` JSON.
+Strapi 5 plugin that adds a `tags` custom field to edit a list of tags (`array of strings`) and store it in the database as a JSON `string`.
 
-## O que este plugin faz
+## What this plugin does
 
-- Registra o custom field `tags` no servidor (`type: text`).
-- Registra o custom field no admin com um componente de input de tags.
-- Serializa o valor para JSON antes de salvar (ex.: `["news","featured","tech"]`).
+- Registers the `tags` custom field on the server (`type: text`).
+- Registers the custom field in the admin panel with a tags input component.
+- Serializes the value to JSON before saving (e.g. `["news","featured","tech"]`).
 
-## Requisitos
+## Requirements
 
-- Node.js 18+ (recomendado: Node.js 20)
+- Node.js 18+ (recommended: Node.js 20)
 - Strapi 5
 
-## Desenvolvimento local do plugin
+## Local plugin development
 
 ```bash
 npm install
@@ -21,16 +21,16 @@ npm run build
 npm run verify
 ```
 
-## Como usar em um projeto Strapi 5
+## How to use in a Strapi 5 project
 
-1. No projeto do plugin:
+1. In the plugin project:
 
 ```bash
 npm install
 npm run watch:link
 ```
 
-2. No projeto Strapi (em outro terminal):
+2. In the Strapi project (in another terminal):
 
 ```bash
 npx yalc add --link strapi-plugin-tags-input
@@ -38,21 +38,21 @@ npm install
 npm run develop
 ```
 
-3. No Content-Type Builder:
+3. In the Content-Type Builder:
 
-- Adicione um novo campo.
-- Abra a categoria de Custom fields.
-- Selecione `Tags`.
+- Add a new field.
+- Open the Custom fields category.
+- Select `Tags`.
 
-## Formato salvo no banco
+## Database value format
 
-O valor é salvo como texto JSON. Exemplos:
+The value is stored as JSON text. Examples:
 
-- Sem tags: `[]`
-- Com tags: `["javascript","strapi","cms"]`
+- No tags: `[]`
+- With tags: `["javascript","strapi","cms"]`
 
-## Estrutura principal
+## Main structure
 
-- `server/src/register.ts`: registro do custom field no backend.
-- `admin/src/index.ts`: registro do custom field no admin.
-- `admin/src/components/TagsInput.tsx`: input visual com adição/remoção de tags.
+- `server/src/register.ts`: backend custom field registration.
+- `admin/src/index.ts`: admin custom field registration.
+- `admin/src/components/TagsInput.tsx`: visual input with add/remove tag behavior.
