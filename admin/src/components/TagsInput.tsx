@@ -395,7 +395,7 @@ const TagsInput = React.forwardRef<HTMLInputElement, TagsInputProps>(
             disabled={disabled}
             required={required && tags.length === 0}
             value={draft}
-            onChange={(event) => {
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               const nextDraft = event.currentTarget.value;
 
               if (nextDraft.length <= DEFAULT_MAX_TAG_LENGTH) {
