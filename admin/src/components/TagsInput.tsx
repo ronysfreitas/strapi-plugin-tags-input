@@ -11,6 +11,7 @@ import { Cross } from "@strapi/icons";
 import { useIntl } from "react-intl";
 
 type NormalizeCase = "none" | "lowercase" | "uppercase";
+type IntlMessage = { id?: string; defaultMessage?: string };
 
 type TagsInputProps = {
   attribute?: {
@@ -24,12 +25,11 @@ type TagsInputProps = {
     };
   };
   disabled?: boolean;
+  description?: string | IntlMessage;
   error?: string;
   hint?: string;
-  intlLabel?: {
-    id?: string;
-    defaultMessage?: string;
-  };
+  intlLabel?: IntlMessage;
+  label?: string | IntlMessage;
   name: string;
   onChange: (event: {
     target: {
@@ -160,10 +160,12 @@ const TagsInput = React.forwardRef<HTMLInputElement, TagsInputProps>(
   (
     {
       attribute,
+      description,
       disabled = false,
       error,
       hint,
       intlLabel,
+      label,
       name,
       onChange,
       placeholder,
@@ -195,21 +197,40 @@ const TagsInput = React.forwardRef<HTMLInputElement, TagsInputProps>(
     const allowDuplicates = parseBoolean(options.allowDuplicates, false);
     const normalizeCase = normalizeCaseValue(options.normalizeCase);
 
-    const label =
-      intlLabel?.id || intlLabel?.defaultMessage
-        ? formatMessage({
-            id: intlLabel?.id ?? `${name}.label`,
-            defaultMessage: intlLabel?.defaultMessage ?? "Tags",
-          })
-        : "Tags";
+    const formatIntlMessage = React.useCallback(
+      (message?: IntlMessage) => {
+        if (!message?.id && !message?.defaultMessage) {
+          return undefined;
+        }
 
+        return formatMessage({
+          id: message.id ?? `${name}.label`,
+          defaultMessage: message.defaultMessage ?? "Tags",
+        });
+      },
+      [formatMessage, name]
+    );
+
+    const labelText =
+      typeof label === "string"
+        ? label
+        : formatIntlMessage(label) ?? formatIntlMessage(intlLabel);
+    const labelMessage =
+      labelText && labelText.trim().length > 0 ? labelText.trim() : "Tags";
+
+    const descriptionText =
+      typeof description === "string"
+        ? description
+        : formatIntlMessage(description);
     const hintMessage =
-      hint ??
-      formatMessage({
-        id: "tags-input.hint",
-        defaultMessage:
-          "Press Enter or type the separator to add tags. Paste multiple tags at once.",
-      });
+      descriptionText && descriptionText.trim().length > 0
+        ? descriptionText.trim()
+        : hint ??
+          formatMessage({
+            id: "tags-input.hint",
+            defaultMessage:
+              "Press Enter or type the separator to add tags. Paste multiple tags at once.",
+          });
 
     const shownError = error || localError;
 
@@ -342,7 +363,7 @@ const TagsInput = React.forwardRef<HTMLInputElement, TagsInputProps>(
         error={shownError}
       >
         <Flex direction="column" alignItems="stretch" gap={2}>
-          <Field.Label>{label}</Field.Label>
+          <Field.Label>{labelMessage}</Field.Label>
 
           {tags.length > 0 ? (
             <Box
