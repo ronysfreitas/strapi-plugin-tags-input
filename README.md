@@ -69,6 +69,26 @@ The value is stored as JSON text. Examples:
 - No tags: `[]`
 - With tags: `["javascript","strapi","cms"]`
 
+## REST API response format
+
+The plugin adds a Document Service middleware that transforms the custom field in API responses.
+
+- Stored in database: JSON string (text column)
+- Returned by API: array of strings
+
+Example REST response snippet:
+
+```json
+{
+  "tags": ["javascript", "strapi", "cms"]
+}
+```
+
+For create/update operations, the middleware also accepts either:
+
+- array (recommended): `["javascript", "strapi"]`
+- stringified JSON: `"[\"javascript\",\"strapi\"]"`
+
 ## Main structure
 
 - `server/src/register.ts`: backend custom field registration.
