@@ -35,12 +35,12 @@ type TagsInputProps = {
     target: {
       name: string;
       type: string;
-      value: string;
+      value: string[];
     };
   }) => void;
   placeholder?: string;
   required?: boolean;
-  value?: string | null;
+  value?: unknown;
 };
 
 const DEFAULT_SEPARATOR = ",";
@@ -79,7 +79,7 @@ const parseTagsValue = (value: unknown): string[] => {
   return [normalized];
 };
 
-const serializeTagsValue = (tags: string[]) => JSON.stringify(tags);
+const serializeTagsValue = (tags: string[]) => tags;
 
 const normalizeCaseValue = (rawValue: unknown): NormalizeCase => {
   if (rawValue === "lowercase" || rawValue === "uppercase") {
@@ -181,7 +181,7 @@ const TagsInput = React.forwardRef<HTMLInputElement, TagsInputProps>(
       setTags(parseTagsValue(value));
     }, [value]);
 
-    const fieldType = attribute?.type ?? "text";
+    const fieldType = attribute?.type ?? "json";
     const options = attribute?.options ?? {};
     const separator =
       typeof options.separator === "string" && options.separator.trim().length > 0

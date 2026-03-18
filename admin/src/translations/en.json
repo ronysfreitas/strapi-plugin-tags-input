@@ -1,7 +1,7 @@
 {
   "plugin.name": "Tags Input",
   "field.tags.label": "Tags",
-  "field.tags.description": "Store tags as a JSON string array",
+  "field.tags.description": "Store tags as a JSON array",
   "field.tags.options.behavior.section": "Tag behavior",
   "field.tags.options.maxTags.label": "Maximum tags",
   "field.tags.options.maxTags.description": "Maximum number of tags allowed",
