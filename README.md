@@ -1,4 +1,4 @@
-﻿# strapi-plugin-tags-input
+# strapi-plugin-tags-custom-field
 
 Strapi 5 plugin that adds a `tags` custom field to edit a list of tags (`array of strings`) and store it as a native JSON array.
 
@@ -27,7 +27,7 @@ npm run verify
 ## Install from npm (recommended)
 
 ```bash
-npm install strapi-plugin-tags-input
+npm install strapi-plugin-tags-custom-field
 ```
 
 Then restart your Strapi server and add the field in Content-Type Builder:
@@ -49,7 +49,7 @@ npm run watch:link
 2. In the Strapi project (in another terminal):
 
 ```bash
-npx yalc add --link strapi-plugin-tags-input
+npx yalc add --link strapi-plugin-tags-custom-field
 npm install
 npm run develop
 ```
@@ -100,3 +100,4 @@ npm run release:check
 ```bash
 npm publish
 ```
+

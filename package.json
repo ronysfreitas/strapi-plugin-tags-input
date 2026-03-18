@@ -1,5 +1,5 @@
 {
-  "name": "strapi-plugin-tags-input",
+  "name": "strapi-plugin-tags-custom-field",
   "version": "1.0.0",
   "description": "Custom field plugin for Strapi 5 to manage tags (array of strings) stored as JSON array.",
   "keywords": [
