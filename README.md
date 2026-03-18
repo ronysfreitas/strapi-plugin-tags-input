@@ -7,6 +7,8 @@ Strapi 5 plugin that adds a `tags` custom field to edit a list of tags (`array o
 - Registers the `tags` custom field on the server (`type: text`).
 - Registers the custom field in the admin panel with a tags input component.
 - Serializes the value to JSON before saving (e.g. `["news","featured","tech"]`).
+- Uses Strapi Design System components for native admin look and feel.
+- Supports keyboard and clipboard workflows for faster data entry.
 
 ## Requirements
 
@@ -43,6 +45,22 @@ npm run develop
 - Add a new field.
 - Open the Custom fields category.
 - Select `Tags`.
+- Configure the custom field options if needed (see below).
+
+## Input behavior and UX
+
+- Press `Enter` to add the current tag.
+- Press the configured separator (default: `,`) to add the current tag.
+- Paste multiple tags at once (separated by comma/newline/custom separator).
+- Press `Backspace` on an empty input to remove the last tag.
+- Each draft tag has a character limit with a live counter in the UI.
+
+## Custom field options (Content-Type Builder)
+
+- `maxTags` (number, default: `20`): maximum number of tags allowed.
+- `allowDuplicates` (boolean, default: `false`): allows repeated tags.
+- `separator` (text, default: `,`): character used for splitting input/paste.
+- `normalizeCase` (select, default: `none`): `none`, `lowercase`, or `UPPERCASE`.
 
 ## Database value format
 

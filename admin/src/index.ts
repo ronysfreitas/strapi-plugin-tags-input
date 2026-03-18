@@ -23,6 +23,121 @@ export default {
             default: module.TagsInput,
           })),
       },
+      options: {
+        base: [
+          {
+            sectionTitle: {
+              id: getTranslation("field.tags.options.behavior.section"),
+              defaultMessage: "Tag behavior",
+            },
+            items: [
+              {
+                intlLabel: {
+                  id: getTranslation("field.tags.options.maxTags.label"),
+                  defaultMessage: "Maximum tags",
+                },
+                description: {
+                  id: getTranslation("field.tags.options.maxTags.description"),
+                  defaultMessage: "Maximum number of tags allowed",
+                },
+                name: "options.maxTags",
+                type: "number",
+                value: 20,
+              },
+              {
+                intlLabel: {
+                  id: getTranslation("field.tags.options.allowDuplicates.label"),
+                  defaultMessage: "Allow duplicates",
+                },
+                description: {
+                  id: getTranslation(
+                    "field.tags.options.allowDuplicates.description"
+                  ),
+                  defaultMessage: "Allow repeated tags in the same value",
+                },
+                name: "options.allowDuplicates",
+                type: "checkbox",
+                value: false,
+              },
+            ],
+          },
+          {
+            sectionTitle: {
+              id: getTranslation("field.tags.options.input.section"),
+              defaultMessage: "Input parsing",
+            },
+            items: [
+              {
+                intlLabel: {
+                  id: getTranslation("field.tags.options.separator.label"),
+                  defaultMessage: "Separator",
+                },
+                description: {
+                  id: getTranslation("field.tags.options.separator.description"),
+                  defaultMessage:
+                    "Character used to split typed and pasted values",
+                },
+                name: "options.separator",
+                type: "text",
+                value: ",",
+              },
+              {
+                intlLabel: {
+                  id: getTranslation("field.tags.options.normalizeCase.label"),
+                  defaultMessage: "Normalize case",
+                },
+                description: {
+                  id: getTranslation(
+                    "field.tags.options.normalizeCase.description"
+                  ),
+                  defaultMessage: "Transform tag casing before saving",
+                },
+                name: "options.normalizeCase",
+                type: "select",
+                value: "none",
+                options: [
+                  {
+                    key: "none",
+                    value: "none",
+                    metadatas: {
+                      intlLabel: {
+                        id: getTranslation(
+                          "field.tags.options.normalizeCase.none"
+                        ),
+                        defaultMessage: "None",
+                      },
+                    },
+                  },
+                  {
+                    key: "lowercase",
+                    value: "lowercase",
+                    metadatas: {
+                      intlLabel: {
+                        id: getTranslation(
+                          "field.tags.options.normalizeCase.lowercase"
+                        ),
+                        defaultMessage: "lowercase",
+                      },
+                    },
+                  },
+                  {
+                    key: "uppercase",
+                    value: "uppercase",
+                    metadatas: {
+                      intlLabel: {
+                        id: getTranslation(
+                          "field.tags.options.normalizeCase.uppercase"
+                        ),
+                        defaultMessage: "UPPERCASE",
+                      },
+                    },
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
     });
 
     app.registerPlugin({

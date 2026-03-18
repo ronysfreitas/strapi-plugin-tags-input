@@ -1,5 +1,18 @@
 {
   "plugin.name": "Tags Input",
   "field.tags.label": "Tags",
-  "field.tags.description": "Store tags as a JSON string array"
+  "field.tags.description": "Store tags as a JSON string array",
+  "field.tags.options.behavior.section": "Tag behavior",
+  "field.tags.options.maxTags.label": "Maximum tags",
+  "field.tags.options.maxTags.description": "Maximum number of tags allowed",
+  "field.tags.options.allowDuplicates.label": "Allow duplicates",
+  "field.tags.options.allowDuplicates.description": "Allow repeated tags in the same value",
+  "field.tags.options.input.section": "Input parsing",
+  "field.tags.options.separator.label": "Separator",
+  "field.tags.options.separator.description": "Character used to split typed and pasted values",
+  "field.tags.options.normalizeCase.label": "Normalize case",
+  "field.tags.options.normalizeCase.description": "Transform tag casing before saving",
+  "field.tags.options.normalizeCase.none": "None",
+  "field.tags.options.normalizeCase.lowercase": "lowercase",
+  "field.tags.options.normalizeCase.uppercase": "UPPERCASE"
 }
