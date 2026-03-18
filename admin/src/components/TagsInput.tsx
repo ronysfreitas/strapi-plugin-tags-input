@@ -232,68 +232,61 @@ const TagsInput = React.forwardRef<HTMLInputElement, TagsInputProps>(
           return false;
         }
 
+        const nextTags = [...tags];
         let didChange = false;
+        let nextError: string | undefined;
 
-        setTags((currentTags) => {
-          const nextTags = [...currentTags];
-
-          for (const rawTag of rawTags) {
-            if (nextTags.length >= maxTags) {
-              setLocalError(
-                formatMessage(
-                  {
-                    id: "tags-input.error.max-tags",
-                    defaultMessage: "You can only add up to {maxTags} tags.",
-                  },
-                  { maxTags }
-                )
-              );
-              break;
-            }
-
-            if (rawTag.length > maxTagLength) {
-              setLocalError(
-                formatMessage(
-                  {
-                    id: "tags-input.error.max-length",
-                    defaultMessage:
-                      "Each tag must be at most {maxLength} characters.",
-                  },
-                  { maxLength: maxTagLength }
-                )
-              );
-              continue;
-            }
-
-            const duplicateIndex = nextTags.findIndex(
-              (tag) => tag.toLowerCase() === rawTag.toLowerCase()
+        for (const rawTag of rawTags) {
+          if (nextTags.length >= maxTags) {
+            nextError = formatMessage(
+              {
+                id: "tags-input.error.max-tags",
+                defaultMessage: "You can only add up to {maxTags} tags.",
+              },
+              { maxTags }
             );
-
-            if (duplicateIndex !== -1 && !allowDuplicates) {
-              setLocalError(
-                formatMessage({
-                  id: "tags-input.error.duplicate",
-                  defaultMessage: "Duplicate tags are not allowed.",
-                })
-              );
-              continue;
-            }
-
-            nextTags.push(rawTag);
-            didChange = true;
+            break;
           }
 
-          if (didChange) {
-            setLocalError(undefined);
-            emitChange(nextTags);
+          if (rawTag.length > maxTagLength) {
+            nextError = formatMessage(
+              {
+                id: "tags-input.error.max-length",
+                defaultMessage:
+                  "Each tag must be at most {maxLength} characters.",
+              },
+              { maxLength: maxTagLength }
+            );
+            continue;
           }
 
-          return didChange ? nextTags : currentTags;
-        });
+          const duplicateIndex = nextTags.findIndex(
+            (tag) => tag.toLowerCase() === rawTag.toLowerCase()
+          );
+
+          if (duplicateIndex !== -1 && !allowDuplicates) {
+            nextError = formatMessage({
+              id: "tags-input.error.duplicate",
+              defaultMessage: "Duplicate tags are not allowed.",
+            });
+            continue;
+          }
+
+          nextTags.push(rawTag);
+          didChange = true;
+        }
+
+        if (didChange) {
+          setTags(nextTags);
+          setLocalError(undefined);
+          emitChange(nextTags);
+        } else if (nextError) {
+          setLocalError(nextError);
+        }
 
         return didChange;
       },
-      [allowDuplicates, emitChange, formatMessage, maxTagLength, maxTags]
+      [allowDuplicates, emitChange, formatMessage, maxTagLength, maxTags, tags]
     );
 
     const commitDraft = React.useCallback(() => {
@@ -333,7 +326,11 @@ const TagsInput = React.forwardRef<HTMLInputElement, TagsInputProps>(
 
       event.preventDefault();
       const parsedTags = parseRawTags(pastedText, separator, normalizeCase);
-      addTags(parsedTags);
+      const added = addTags(parsedTags);
+
+      if (added) {
+        setDraft("");
+      }
     };
 
     return (
