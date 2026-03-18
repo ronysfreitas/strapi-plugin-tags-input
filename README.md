@@ -25,13 +25,13 @@ Restart your Strapi server after installation.
 - `maxTags` (default: `20`): maximum number of tags.
 - `maxTagLength` (default: `40`): maximum characters per tag.
 - `allowDuplicates` (default: `false`): allow repeated tags.
-- `separator` (default: `,`): character used to split typed/pasted values.
+- `separator` (optional): character used to split typed/pasted values.
 - `normalizeCase` (default: `none`): `none`, `lowercase`, or `UPPERCASE`.
 
 ## Input behavior
 
 - `Enter` adds the current tag.
-- The configured separator also adds the current tag.
+- If configured, the separator also adds the current tag.
 - Paste supports multiple tags (newline or configured separator).
 
 ## Data format

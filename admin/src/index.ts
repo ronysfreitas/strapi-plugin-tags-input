@@ -94,7 +94,7 @@ export default {
                 },
                 name: "options.separator",
                 type: "text",
-                value: ",",
+                value: "",
               },
               {
                 intlLabel: {

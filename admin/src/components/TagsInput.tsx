@@ -43,7 +43,6 @@ type TagsInputProps = {
   value?: unknown;
 };
 
-const DEFAULT_SEPARATOR = ",";
 const DEFAULT_MAX_TAGS = 20;
 const DEFAULT_MAX_TAG_LENGTH = 40;
 
@@ -129,9 +128,10 @@ const parsePositiveInt = (value: unknown, fallbackValue: number): number => {
   return fallbackValue;
 };
 
-const getSplitRegex = (separator: string) => {
+const getSplitRegex = (separator?: string) => {
   const characters = Array.from(new Set([separator, "\n", "\r"])).filter(
-    (character) => character.length > 0
+    (character): character is string =>
+      typeof character === "string" && character.length > 0
   );
 
   const escapedCharacters = characters
@@ -143,7 +143,7 @@ const getSplitRegex = (separator: string) => {
 
 const parseRawTags = (
   rawValue: string,
-  separator: string,
+  separator: string | undefined,
   normalizeCase: NormalizeCase
 ) =>
   rawValue
@@ -151,9 +151,12 @@ const parseRawTags = (
     .map((tag) => normalizeTag(tag, normalizeCase))
     .filter((tag) => tag.length > 0);
 
-const hasSplitCharacters = (value: string, separator: string) =>
+const hasSplitCharacters = (value: string, separator?: string) =>
   [separator, "\n", "\r"].some(
-    (character) => character.length > 0 && value.includes(character)
+    (character): character is string =>
+      typeof character === "string" &&
+      character.length > 0 &&
+      value.includes(character)
   );
 
 const TagsInput = React.forwardRef<HTMLInputElement, TagsInputProps>(
@@ -188,7 +191,7 @@ const TagsInput = React.forwardRef<HTMLInputElement, TagsInputProps>(
     const separator =
       typeof options.separator === "string" && options.separator.trim().length > 0
         ? options.separator.trim().charAt(0)
-        : DEFAULT_SEPARATOR;
+        : undefined;
     const maxTags = parsePositiveInt(options.maxTags, DEFAULT_MAX_TAGS);
     const maxTagLength = parsePositiveInt(
       options.maxTagLength,
@@ -229,7 +232,9 @@ const TagsInput = React.forwardRef<HTMLInputElement, TagsInputProps>(
           formatMessage({
             id: "tags-input.hint",
             defaultMessage:
-              "Press Enter or type the separator to add tags. Paste multiple tags at once.",
+              separator
+                ? "Press Enter or type the separator to add tags. Paste multiple tags at once."
+                : "Press Enter to add tags. Paste multiple tags at once.",
           });
 
     const shownError = error || localError;
@@ -332,7 +337,7 @@ const TagsInput = React.forwardRef<HTMLInputElement, TagsInputProps>(
     );
 
     const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-      if (event.key === "Enter" || event.key === separator) {
+      if (event.key === "Enter" || (separator && event.key === separator)) {
         event.preventDefault();
         commitDraft();
       }
@@ -423,14 +428,19 @@ const TagsInput = React.forwardRef<HTMLInputElement, TagsInputProps>(
             onPaste={onPaste}
             placeholder={
               placeholder ??
-              formatMessage(
-                {
-                  id: "tags-input.placeholder",
-                  defaultMessage:
-                    "Type a tag and press Enter or {separator} to add it",
-                },
-                { separator }
-              )
+              (separator
+                ? formatMessage(
+                    {
+                      id: "tags-input.placeholder.with-separator",
+                      defaultMessage:
+                        "Type a tag and press Enter or {separator} to add it",
+                    },
+                    { separator }
+                  )
+                : formatMessage({
+                    id: "tags-input.placeholder.without-separator",
+                    defaultMessage: "Type a tag and press Enter to add it",
+                  }))
             }
           />
 
