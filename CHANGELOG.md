@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.2] - 2026-03-18
+
+### Fixed
+- Cleared the input after successfully adding tags with Enter, separator, and paste.
+- Removed Backspace behavior that removed the last tag when input was empty.
+- Rendered field `label` and `description` configured in Strapi Content-Type Builder.
+
 ## [1.0.1] - 2026-03-18
 
 ### Changed
