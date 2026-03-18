@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.3] - 2026-03-18
+
+### Changed
+- Made separator behavior opt-in: separator key handling only applies when `options.separator` is configured.
+- Updated field hint and placeholder copy for scenarios with and without configured separator.
+- Updated custom-field separator option defaults/translations to reflect optional behavior.
+
+### Fixed
+- Rendered field description directly below the field label.
+
 ## [1.0.2] - 2026-03-18
 
 ### Fixed
