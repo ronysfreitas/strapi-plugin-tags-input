@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.4] - 2026-03-18
+
+### Changed
+- Declared Node.js compatibility range as `>=18 <25` (Node 18 to 24).
+- Updated CI to run build and verification on Node.js 18, 20, 22, and 24.
+- Updated README compatibility section to document Node.js 18 to 24 support.
+
 ## [1.0.3] - 2026-03-18
 
 ### Changed
