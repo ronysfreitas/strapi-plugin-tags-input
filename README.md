@@ -49,7 +49,7 @@ Example:
 ## Compatibility
 
 - Strapi: `v5`
-- Node.js: `>=18`
+- Node.js: `>=18 <25` (18 to 24)
 
 ## Local development (plugin repo)
 
